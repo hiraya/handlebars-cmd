@@ -34,6 +34,9 @@ readStream(process.stdin, function(err, tmpl) {
             var f = fs.readFileSync(file);
             return handle(f, context); 
         });
+        hbs.registerHelper('stringify', function(context) {
+            return JSON.stringify(context);
+        });
         var template = hbs.compile(tmpl.toString());
         var result = template(args);
         return result;
